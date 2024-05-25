@@ -16,9 +16,13 @@ Görev oluşturarak ilgili göreve projede bulunan çalışanlar eklenebilmelidi
 İlgili uygulamada;
 
 • Şirket Ekleme/Silme/Düzenleme
+
 • Proje Ekleme/Silme/Düzenleme/Atama
+
 • Çalışan Ekleme/Silme/Düzenleme/Atama
+
 • Görev Ekleme/Silme/Düzenleme/Atama
+
 • Raporlama
 
 hizmetleri olmalıdır.
