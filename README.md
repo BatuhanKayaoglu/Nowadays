@@ -29,10 +29,15 @@ hizmetleri olmalıdır.
 Restful mimari kullanılarak geliştirilecek olan bu API;
 
 • Company
+
 • Project
+
 • Employee
+
 • Issue
+
 • Report
+
 servislerini barındırmalıdır.
 
 1. Mevcut altyapı interface/abstract class gibi veri yapılarını barındırmalıdır.
