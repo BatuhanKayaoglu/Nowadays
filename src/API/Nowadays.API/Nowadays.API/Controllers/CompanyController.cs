@@ -23,19 +23,20 @@ namespace Nowadays.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class CompanyController(ICompanyService companyService, IUnitOfWork uow,IMapper mapper) : ControllerBase
+    public class CompanyController(ICompanyService companyService, IUnitOfWork uow, IMapper mapper, IProjectService projectService) : ControllerBase
     {
         private readonly IUnitOfWork _uow = uow;
         private readonly ICompanyService _companyService = companyService;
-        private readonly IMapper _mapper=mapper;   
+        private readonly IMapper _mapper = mapper;
+        private readonly IProjectRepository _projectService;
 
 
         [HttpGet]
         [Route("GetCompanies")]
         public async Task<IActionResult> GetCompanies([FromQuery] int page, [FromQuery] int pageSize)
         {
-            var query = _uow.Companies.AsQueryable();
-            var result = await query.GetPaged(page, pageSize);
+            IQueryable<Company> query = _uow.Companies.AsQueryable();
+            PagedViewModel<Company> result = await query.GetPaged(page, pageSize);
             return Ok(result);
         }
 
@@ -46,9 +47,9 @@ namespace Nowadays.API.Controllers
         {
             if (company != null)
             {
-                var companyModel = _mapper.Map<Company>(company);
+                Company companyModel = _mapper.Map<Company>(company);
                 await _companyService.CompanyAdd(companyModel);
-                return Ok("Company added successfully.");   
+                return Ok("Company added successfully.");
             }
 
             else
@@ -61,7 +62,7 @@ namespace Nowadays.API.Controllers
         {
             if (id != null)
             {
-                await _companyService.CompanyDelete(id);  
+                await _companyService.CompanyDelete(id);
                 return Ok("Company deleted successfully.");
             }
 
@@ -81,7 +82,30 @@ namespace Nowadays.API.Controllers
 
             else
                 return BadRequest("Failed to update company.");
-        }       
+        }
+
+        [HttpPost]
+        [Route("AddProjectToCompany")]
+        public async Task<IActionResult> AddProjectToCompany(Guid companyId, Guid projectId)
+        {
+            if (companyId == Guid.Empty || projectId == Guid.Empty)
+                return BadRequest("Invalid company ID or project ID.");
+
+            Company company = await _companyService.GetCompanyById(companyId);
+            if (company == null)
+                return NotFound("Company not found.");
+
+            Project project = await _projectService.GetByIdAsync(projectId);
+            if (project == null)
+                return NotFound("Project not found.");
+
+            company.Projects.Add(project);
+            await _companyService.CompanyUpdate(company);
+
+            return Ok("Project added to company successfully.");
+        }
+
+
 
 
     }

@@ -3,17 +3,8 @@ using Nowadays.Common.ResponseViewModel;
 using Nowadays.Common.ViewModels;
 using Nowadays.Infrastructure.IRepositories;
 using Nowadays.Infrastructure.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Nowadays.API.Exceptions;
-using Nowadays.API.Extensions.JwtConf;
 using Nowadays.API.Pagination;
-using Nowadays.API.Services;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
 using Nowadays.Entity.Models;
 
 namespace Nowadays.API.Controllers
@@ -37,8 +28,8 @@ namespace Nowadays.API.Controllers
         [Route("GetEmployees")]
         public async Task<IActionResult> GetEmployees([FromQuery] int page, [FromQuery] int pageSize)
         {
-            var query = _uow.Employees.AsQueryable();
-            var result = await query.GetPaged(page, pageSize);
+            IQueryable<Employee> query = _uow.Employees.AsQueryable();
+            PagedViewModel<Employee> result = await query.GetPaged(page, pageSize);
             return Ok(result);
         }
 
@@ -48,11 +39,10 @@ namespace Nowadays.API.Controllers
         {
             if (employee != null)
             {
-                var employeeModel = _mapper.Map<Employee>(employee);
+                Employee employeeModel = _mapper.Map<Employee>(employee);
                 await _employeeService.EmployeeAdd(employeeModel);
                 return Ok("Employee added successfully.");
             }
-
             return BadRequest("Failed to add employee.");
         }
 
@@ -65,7 +55,6 @@ namespace Nowadays.API.Controllers
                 await _employeeService.EmployeeDelete(id);
                 return Ok("Employee deleted successfully.");
             }
-
             return BadRequest("Failed to delete employee.");
         }
 
@@ -75,12 +64,22 @@ namespace Nowadays.API.Controllers
         {
             if (employee != null)
             {
-                var employeeModel = _mapper.Map<Employee>(employee);
+                Employee employeeModel = _mapper.Map<Employee>(employee);
                 await _employeeService.EmployeeUpdate(employeeModel);
                 return Ok("Employee updated successfully.");
             }
-
             return BadRequest("Failed to update employee.");
-        }       
+        }
+
+        [HttpPost]
+        [Route("BulkAdd")]
+        public async Task<IActionResult> BulkAddEmployee(List<AddEmployeeViewModel> employees)
+        {
+            if (employees == null)
+                return BadRequest("employees are not null...");
+
+            List<Employee> employeeList = await _employeeService.BulkEmployeeAdd(employees);
+            return Ok(employeeList);
+        }
     }
 }

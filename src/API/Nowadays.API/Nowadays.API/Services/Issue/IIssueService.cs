@@ -12,5 +12,7 @@ namespace Nowadays.Infrastructure.Services
         Task<string> IssueAdd(Issue issue);
         Task<string> IssueDelete(Guid id);
         Task<string> IssueUpdate(Issue issue);
+        Task<Employee> AddEmployeeToIssue(Guid IssueId, Guid employeeId);
+        Task<List<Guid>> MultipleAddEmployeeToIssue(List<Guid> employeeIds, Guid issueId);
     }
 }

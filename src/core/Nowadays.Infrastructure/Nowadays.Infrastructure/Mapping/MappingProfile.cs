@@ -18,6 +18,7 @@ namespace Nowadays.Infrastructure.Mapping
         {
             CreateMap<AddCompanyViewModel, Company>().ReverseMap();
             CreateMap<AddProjectViewModel, Company>().ReverseMap();
+            CreateMap<AddEmployeeToTaskViewModel, Issue>().ReverseMap();
 
         }
     }

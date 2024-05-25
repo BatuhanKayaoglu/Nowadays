@@ -9,6 +9,8 @@ namespace Nowadays.Infrastructure.Services
 {
     public interface IProjectService
     {
+        Task<string> BulkDeleteProject(List<Guid> projectIds);
+        Task<Project> GetProjectById(Guid id);
         Task<string> ProjectAdd(Project company);
         Task<string> ProjectDelete(Guid id);
         Task<string> ProjectUpdate(Project company);

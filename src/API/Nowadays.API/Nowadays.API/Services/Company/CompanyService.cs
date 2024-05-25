@@ -65,6 +65,14 @@ namespace Nowadays.Infrastructure.Services
         }
 
 
+        public async Task<Company> GetCompanyById(Guid companyId)
+        {
+            if (companyId == null)
+                throw new DatabaseValidationException("Company is null");
+
+            return await _uow.Companies.GetByIdAsync(companyId);
+        }
+
 
 
     }

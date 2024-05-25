@@ -12,5 +12,6 @@ namespace Nowadays.Infrastructure.Services
         Task<string> CompanyAdd(Company company);
         Task<string> CompanyDelete(Guid id);
         Task<string> CompanyUpdate(Company company);
+        Task<Company> GetCompanyById(Guid companyId);
     }
 }

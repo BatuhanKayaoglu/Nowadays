@@ -19,6 +19,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using Nowadays.API.Services.EmailSender;
+using System.Linq.Expressions;
 
 namespace Nowadays.Infrastructure.Services
 {
@@ -65,6 +66,22 @@ namespace Nowadays.Infrastructure.Services
             return "project updated successfully";
         }
 
+        public async Task<Project> GetProjectById(Guid id)
+        {
+            if (id == null)
+                throw new DatabaseValidationException("Project is null");
+
+            return await _uow.Projects.GetByIdAsync(id);
+        }
+
+
+        public async Task<string> BulkDeleteProject(List<Guid> projectIds)
+        {
+            Expression<Func<Project, bool>> predicate = project => projectIds.Contains(project.Id);
+            await _uow.Projects.BulkDelete(predicate);
+
+            return "Projects deleted successfully";     
+        }
 
 
 

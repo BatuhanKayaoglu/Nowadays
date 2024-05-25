@@ -64,7 +64,24 @@ namespace Nowadays.Infrastructure.Services
             return "Employee updated successfully";
         }
 
+        public async Task<Employee> GetEmployeeById(Guid id)
+        {
+            if (id == null)
+                throw new DatabaseValidationException("Employee is null");
 
+            return await _uow.Employees.GetByIdAsync(id);
+        }
+
+        public async Task<List<Employee>> BulkEmployeeAdd(List<AddEmployeeViewModel> employees)
+        {
+            if (employees == null)
+                throw new DatabaseValidationException("Employee is null");  
+
+            List<Employee> employeeList = _mapper.Map<List<Employee>>(employees);
+            await _uow.Employees.BulkAdd(employeeList);
+
+            return employeeList;    
+        }
 
 
     }

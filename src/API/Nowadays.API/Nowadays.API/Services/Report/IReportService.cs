@@ -9,5 +9,8 @@ namespace Nowadays.Infrastructure.Services
 {
     public interface IReportService
     {
+        Task<string> ReportAdd(Report report);
+        Task<string> ReportDelete(Guid id);
+        Task<string> ReportUpdate(Report report);
     }
 }

@@ -9,8 +9,10 @@ namespace Nowadays.Infrastructure.Services
 {
     public interface IEmployeeService
     {
+        Task<List<Employee>> BulkEmployeeAdd(List<AddEmployeeViewModel> employees);
         Task<string> EmployeeAdd(Employee employee);
         Task<string> EmployeeDelete(Guid id);
         Task<string> EmployeeUpdate(Employee employee);
+        Task<Employee> GetEmployeeById(Guid id);
     }
 }

@@ -36,8 +36,8 @@ namespace Nowadays.API.Controllers
         [Route("GetReports")]
         public async Task<IActionResult> GetReports([FromQuery] int page, [FromQuery] int pageSize)
         {
-            var query = _uow.Report.AsQueryable();
-            var result = await query.GetPaged(page, pageSize);
+            IQueryable<Report> query = _uow.Report.AsQueryable();
+           PagedViewModel<Report> result = await query.GetPaged(page, pageSize);
             return Ok(result);
         }
 
@@ -47,11 +47,39 @@ namespace Nowadays.API.Controllers
         {
             if (report != null)
             {
-                await _reportService.EmployeeAdd(employeeModel);
-                return Ok("Employee added successfully.");
+                await _reportService.ReportAdd(report);
+                return Ok("Report added successfully.");
             }
 
-            return BadRequest("Failed to add employee.");
+            return BadRequest("Failed to add report.");
+        }
+
+        [HttpDelete]
+        [Route("Delete")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            if (id != null)
+            {
+                await _reportService.ReportDelete(id);
+                return Ok("Report deleted successfully.");
+            }
+
+            else
+                return BadRequest("Failed to delete Report.");
+        }
+
+        [HttpPut]
+        [Route("Update")]
+        public async Task<IActionResult> Update(Report report)
+        {
+            if (report != null)
+            {
+                await _reportService.ReportUpdate(report);
+                return Ok("Report updated successfully.");
+            }
+
+            else
+                return BadRequest("Failed to update company.");
         }
 
 

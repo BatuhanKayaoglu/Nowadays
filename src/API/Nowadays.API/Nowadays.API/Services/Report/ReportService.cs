@@ -64,5 +64,6 @@ namespace Nowadays.Infrastructure.Services
             return "Report updated successfully";
         }
 
+
     }
 }

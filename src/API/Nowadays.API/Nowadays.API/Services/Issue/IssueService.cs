@@ -64,8 +64,40 @@ namespace Nowadays.Infrastructure.Services
             return "Issue updated successfully";
         }
 
+        public async Task<Employee> AddEmployeeToIssue(Guid IssueId, Guid employeeId)
+        {
+            Issue issue = await _uow.Issue.GetByIdAsync(IssueId);
+            Employee employee = await _uow.Employees.GetByIdAsync(employeeId);
+
+            if (employee is null)
+                throw new DatabaseValidationException("employee is null");
+
+            if (issue is null)
+                throw new DatabaseValidationException("issue is null");
+
+            issue.Assignees.Add(employee);
+
+            return employee;
+        }
+
+        public async Task<List<Guid>> MultipleAddEmployeeToIssue(List<Guid> employeeIds, Guid IssueId)
+        {
+            List<Guid> addedEmployees = new List<Guid>();
+
+            foreach(var employeeId in employeeIds)
+            {
+                addedEmployees.Add(employeeId);
+            }
+
+            Issue issue = await _uow.Issue.GetByIdAsync(IssueId);   
+            foreach (var employee in addedEmployees){
+                Employee employeeToAdd = await _uow.Employees.GetByIdAsync(employee);
+                issue.Assignees.Add(employeeToAdd);
+            }   
+            return addedEmployees;  
 
 
 
+        }
     }
 }
