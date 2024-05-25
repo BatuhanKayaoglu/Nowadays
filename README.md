@@ -3,9 +3,13 @@
 UYGULAMA TEKNIK ALTYAPISI
 
 • .NET Core
+
 • RestAPI (SwaggerUI)
+
 • Repository/UnitOfWork Pattern
+
 • SOLID
+
 • EF Core (CodeFirst)
 
 SENARYO
@@ -41,5 +45,6 @@ Restful mimari kullanılarak geliştirilecek olan bu API;
 servislerini barındırmalıdır.
 
 1. Mevcut altyapı interface/abstract class gibi veri yapılarını barındırmalıdır.
+
 2. Sisteme eklenen çalışanların TC kimlik numaraları doğrulanarak tüzel kişi
 oldukları tespit edilmelidir. (https://tckimlik.nvi.gov.tr/service/kpspublic.asmx?wsdl)
