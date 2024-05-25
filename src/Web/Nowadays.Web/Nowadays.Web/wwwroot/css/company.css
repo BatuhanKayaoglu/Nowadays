@@ -1,0 +1,22 @@
+
+
+.company-add-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+
+.company-add-form {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
