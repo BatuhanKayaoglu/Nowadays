@@ -32,6 +32,10 @@ namespace Nowadays.Infrastructure.Extensions
 
             services.AddIdentity<AppUser, AppRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<NowadaysContext>(); // Identity'yi ekledik.   
 
+            // For SEED DATA
+            var seedData = new SeedData();
+            seedData.SeedAsync(configuration).GetAwaiter().GetResult();
+
             services.AddScoped<ICompanyRepository, CompanyRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IIssueRepository, IssueRepository>();

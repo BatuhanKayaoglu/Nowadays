@@ -1,22 +1,8 @@
 ﻿using AutoMapper;
-using Azure.Core;
-using Nowadays.Common.Extensions;
-using Nowadays.Common.ResponseViewModel;
-using Nowadays.Common.ViewModels;
 using Nowadays.Entity.Models;
-using Nowadays.Entity.Models.Identity;
 using Nowadays.Infrastructure.IRepositories;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Nowadays.API.Exceptions;
-using Nowadays.API.Extensions.JwtConf;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Policy;
-using System.Text;
 using System.Threading.Tasks;
 using Nowadays.API.Services.EmailSender;
 

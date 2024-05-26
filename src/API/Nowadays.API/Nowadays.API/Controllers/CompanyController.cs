@@ -3,16 +3,10 @@ using Nowadays.Common.ResponseViewModel;
 using Nowadays.Common.ViewModels;
 using Nowadays.Infrastructure.IRepositories;
 using Nowadays.Infrastructure.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Nowadays.API.Exceptions;
-using Nowadays.API.Extensions.JwtConf;
 using Nowadays.API.Pagination;
 using Nowadays.API.Services;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Nowadays.Entity.Models;
 
