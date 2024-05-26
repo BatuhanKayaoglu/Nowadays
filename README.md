@@ -20,6 +20,8 @@ EKSTRA EKLENEN ÖZELLİKLER
 
 • Exception Handling mekanizması ,
 
+• AutoMapper ve FluentValidation kütüphanesi,
+
 • Serilog ile birlikte Exception Logging mekanizması ve bu logları json ve txt formatında kaydeden bir yapı,
 
 • Aynı zamanda Bogus kütüphanesi ile SeedData kullanarak Database içerisindeki tablolara fake test dataları eklenerek testin kolaylaşması
