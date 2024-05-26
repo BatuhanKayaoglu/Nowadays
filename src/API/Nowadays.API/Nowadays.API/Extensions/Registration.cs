@@ -19,11 +19,14 @@ namespace Nowadays.API.Extensions
     {
         public static IServiceCollection AddAPIRegistration(this IServiceCollection services, IConfiguration configuration)
         {
-
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IEmailSenderService, EmailSenderService>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<IIssueService, IssueService>();
+            services.AddTransient<IProjectService, ProjectService>();
+            services.AddTransient<IReportService, ReportService>();
 
             // **** JWT CONFIGURATION START ****
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
@@ -36,12 +39,11 @@ namespace Nowadays.API.Extensions
                     ClockSkew = TimeSpan.Zero,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)),
                     ValidateIssuerSigningKey = true, // To verify whether the token value belongs to our application.
-                    ValidateLifetime = true 
+                    ValidateLifetime = true
                 };
 
             });
             // **** JWT CONFIGURATION END ****
-
 
             return services;
 

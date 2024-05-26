@@ -31,7 +31,7 @@ namespace Nowadays.Infrastructure.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connStr = _configuration["NowadaysDbConnectionString"].ToString();
+                var connStr = "Server=DESKTOP-3MBBMR2\\SQLEXPRESS;Initial Catalog=Nowadays;MultipleActiveResultSets=True;Integrated Security=True;Encrypt=True;TrustServerCertificate=True;";
                 optionsBuilder.UseSqlServer(connStr);
             }
 

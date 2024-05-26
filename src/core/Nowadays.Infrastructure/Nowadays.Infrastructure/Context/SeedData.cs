@@ -91,7 +91,8 @@ namespace Nowadays.Infrastructure.Context
             foreach (var project in projects)
             {
                 var company = companies.Find(c => c.Id == project.CompanyId);
-                company.Projects.Add(project);
+                if (company != null)
+                    company.Projects.Add(project);
             }
 
             return projects;
@@ -113,7 +114,8 @@ namespace Nowadays.Infrastructure.Context
             foreach (var issue in issues)
             {
                 var project = projects.Find(p => p.Id == issue.ProjectId);
-                project.Issues.Add(issue);
+                if (project != null)
+                    project.Issues.Add(issue);
 
                 var assignees = new Faker().PickRandom(employees, 2).ToList();
                 foreach (var employee in assignees)

@@ -22,7 +22,7 @@ namespace Nowadays.API.Controllers
         private readonly IUnitOfWork _uow = uow;
         private readonly ICompanyService _companyService = companyService;
         private readonly IMapper _mapper = mapper;
-        private readonly IProjectRepository _projectService;
+        private readonly IProjectService _projectService = projectService;
 
 
         [HttpGet]
@@ -45,7 +45,6 @@ namespace Nowadays.API.Controllers
                 await _companyService.CompanyAdd(companyModel);
                 return Ok("Company added successfully.");
             }
-
             else
                 return BadRequest("Failed to add company.");
         }
@@ -59,7 +58,6 @@ namespace Nowadays.API.Controllers
                 await _companyService.CompanyDelete(id);
                 return Ok("Company deleted successfully.");
             }
-
             else
                 return BadRequest("Failed to delete company.");
         }
@@ -73,7 +71,6 @@ namespace Nowadays.API.Controllers
                 await _companyService.CompanyUpdate(company);
                 return Ok("Company updated successfully.");
             }
-
             else
                 return BadRequest("Failed to update company.");
         }
@@ -89,9 +86,12 @@ namespace Nowadays.API.Controllers
             if (company == null)
                 return NotFound("Company not found.");
 
-            Project project = await _projectService.GetByIdAsync(projectId);
+            Project project = await _projectService.GetProjectById(projectId);
             if (project == null)
                 return NotFound("Project not found.");
+
+            if (company.Projects == null)
+                company.Projects = new List<Project>();
 
             company.Projects.Add(project);
             await _companyService.CompanyUpdate(company);

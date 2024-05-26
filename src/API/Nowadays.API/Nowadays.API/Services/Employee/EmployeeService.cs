@@ -27,10 +27,10 @@ namespace Nowadays.Infrastructure.Services
         public async Task<string> EmployeeAdd(Employee employee)
         {
             if (employee == null)
-                throw new DatabaseValidationException("Employee is null");
+                throw new UserCreateFailedException("Employee not created!");
 
             await _uow.Employees.AddAsync(employee);
-            return "Employee added successfully";
+            return "Employee created successfully";
         }
 
         public async Task<string> EmployeeDelete(Guid id)
@@ -62,12 +62,12 @@ namespace Nowadays.Infrastructure.Services
         public async Task<List<Employee>> BulkEmployeeAdd(List<AddEmployeeViewModel> employees)
         {
             if (employees == null)
-                throw new DatabaseValidationException("Employee is null");  
+                throw new DatabaseValidationException("Employee is null");
 
             List<Employee> employeeList = _mapper.Map<List<Employee>>(employees);
             await _uow.Employees.BulkAdd(employeeList);
 
-            return employeeList;    
+            return employeeList;
         }
 
 

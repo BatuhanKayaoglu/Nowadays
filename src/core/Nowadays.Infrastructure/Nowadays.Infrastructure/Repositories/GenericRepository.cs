@@ -188,7 +188,7 @@ namespace Nowadays.Infrastructure.Repositories
         }
 
 
-        public virtual async Task<List<TEntity>> GetList(Expression<Func<TEntity, bool>> predicate, bool noTracking = true, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, params Expression<Func<TEntity, object>>[] includes)
+        public virtual async Task<List<TEntity>> GetList(Expression<Func<TEntity, bool>> predicate, bool noTracking = true, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, params Expression<Func<TEntity, object>>[] includes)
         {
             IQueryable<TEntity> query = entity;
 
@@ -230,7 +230,7 @@ namespace Nowadays.Infrastructure.Repositories
 
         public virtual async Task<TEntity> GetByIdAsync(Guid id, bool noTracking = true, params Expression<Func<TEntity, object>>[] includes)
         {
-            TEntity found = await entity.FindAsync(id);
+            TEntity? found = await entity.FindAsync(id);
 
             if (found == null)
                 return null;
