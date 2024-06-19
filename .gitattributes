@@ -64,4 +64,6 @@
 *.html linguist-detectable=false  
 *.CSS linguist-detectable=false 
 *.SCSS linguist-detectable=false  
+*.csharp linguist-detectable=true  
+
 
