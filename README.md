@@ -63,4 +63,4 @@ servislerini barındırmalıdır.
 1. Mevcut altyapı interface/abstract class gibi veri yapılarını barındırmalıdır.
 
 2. Sisteme eklenen çalışanların TC kimlik numaraları doğrulanarak tüzel kişi
-oldukları tespit edilmelidir. (https://tckimlik.nvi.gov.tr/service/kpspublic.asmx?wsdl)
+oldukları tespit edilmelidir. Örneğin: (https://tckimlik.nvi.gov.tr/service/kpspublic.asmx?wsdl)
