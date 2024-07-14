@@ -49,12 +49,14 @@ The Nowadays system will manage:
 
 
 ## Installation and Usage
-
 To clone the project to your local environment:
 
 ```bash
 git clone https://github.com/BatuhanKayaoglu/Nowadays.git
 ```
+
+## Database Migration
+Run the following commands to apply migrations and seed the database:
 
 ```bash
 dotnet ef migrations add InitialCreate
