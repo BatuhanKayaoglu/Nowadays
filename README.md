@@ -40,6 +40,9 @@ The Nowadays system will manage:
 - Report Service: Generate reports.
 
 
+
+
+
 - **Implementation Details**
 - Interface/Abstract Class Usage: The existing infrastructure includes interfaces and abstract classes for better code organization and reusability.
 - Identity Verification: Employee identity verification through TC (Turkish Citizenship) number validation using the provided web service.
