@@ -29,9 +29,9 @@ The Nowadays system will manage:
 - Employees: Add, Delete, Update, Assign employees to projects.
 - Issues: Add, Delete, Update, Assign issues to employees.
 - Reporting: Generate various reports.
-- RESTful Services
 
-## Services
+
+## RESTful Services
 - **The API will include the following services**
 - Company Service: Manage companies.
 - Project Service: Manage projects.
@@ -54,4 +54,9 @@ To clone the project to your local environment:
 
 ```bash
 git clone https://github.com/BatuhanKayaoglu/Nowadays.git
+```
 
+```bash
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
