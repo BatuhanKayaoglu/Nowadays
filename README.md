@@ -31,7 +31,7 @@ The Nowadays system will manage:
 - Reporting: Generate various reports.
 - RESTful Services
 
-
+## Services
 - **The API will include the following services**
 - Company Service: Manage companies.
 - Project Service: Manage projects.
@@ -42,11 +42,10 @@ The Nowadays system will manage:
 
 
 
-
+## Implementations
 - **Implementation Details**
 - Interface/Abstract Class Usage: The existing infrastructure includes interfaces and abstract classes for better code organization and reusability.
 - Identity Verification: Employee identity verification through TC (Turkish Citizenship) number validation using the provided web service.
-- Getting Started
 
 
 ## Installation and Usage
