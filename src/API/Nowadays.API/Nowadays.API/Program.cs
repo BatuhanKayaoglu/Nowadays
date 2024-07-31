@@ -12,6 +12,7 @@ using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;
 using System.Collections.ObjectModel;
 using System.Text;
+using Nowadays.API.Middlewares.ExceptionHandlerMiddleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -51,10 +52,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.ConfigureExceptionHandlingMiddleware();
+
 app.UseHttpsRedirection();
 
 // If we are in a development environment, I send it this way because I want to see the details. However, when I upload the same application to PROD, I will only see the message part instead of all the details.
-app.ConfigureExceptionHandling(app.Environment.IsDevelopment());
+//app.ConfigureExceptionHandling(app.Environment.IsDevelopment());
 
 //FOR SERILOG
 app.UseSerilogRequestLogging();

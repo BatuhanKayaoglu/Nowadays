@@ -12,6 +12,8 @@ using System.Text;
 using Nowadays.API.Services.Auth;
 using Nowadays.API.Services.Token;
 using Nowadays.API.Services.EmailSender;
+using Nowadays.API.Middlewares.ExceptionHandlerMiddleware;
+using Nowadays.API.Middlewares.Filter.Validation;
 
 namespace Nowadays.API.Extensions
 {
@@ -44,6 +46,16 @@ namespace Nowadays.API.Extensions
 
             });
             // **** JWT CONFIGURATION END ****
+
+            // ****VALIDATION CONFIGURATION START ****  
+            services.AddTransient<ExceptionMiddleware>();
+
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<ValidationFilter>();
+            });
+            // ****VALIDATION CONFIGURATION END ****  
+
 
             return services;
 

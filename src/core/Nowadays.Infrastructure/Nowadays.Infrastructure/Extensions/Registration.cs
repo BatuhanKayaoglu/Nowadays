@@ -13,6 +13,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation.AspNetCore;
 
 namespace Nowadays.Infrastructure.Extensions
 {
@@ -28,7 +29,9 @@ namespace Nowadays.Infrastructure.Extensions
 
             var assm = Assembly.GetExecutingAssembly();
             services.AddAutoMapper(assm);
-            services.AddValidatorsFromAssembly(assm);
+            //services.AddValidatorsFromAssembly(assm);
+            services.AddFluentValidation(p => p.RegisterValidatorsFromAssembly(assm)); // FOR FLUENT VALIDATION 
+
 
             services.AddIdentity<AppUser, AppRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<NowadaysContext>(); // Identity'yi ekledik.   
 
