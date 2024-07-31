@@ -1,66 +1,64 @@
-# Nowadays
+# Nowadays Issue Tracking System
 
-UYGULAMA TEKNIK ALTYAPISI
+## Overview
+Nowadays is an issue tracking system designed to help organizations manage tasks and projects efficiently. Similar to Jira, it provides functionalities for managing companies, projects, employees, and issues.
 
-• .NET Core
+- **Application Technical Infrastructure**
+  - .NET Core
+  - RestAPI (SwaggerUI)
+  - Repository/UnitOfWork Pattern
+  - SOLID Principles
+  - EF Core (CodeFirst)
 
-• RestAPI (SwaggerUI)
+    
 
-• Repository/UnitOfWork Pattern
+- **Additional Features**
+  - JWT and Refresh Token: Implemented JWT Token and Refresh Token mechanisms.
+  - .NET Identity Integration: Includes endpoints for Login, Register, Confirm Email, Forgot-Reset Password, and Login-2FA.
+  - Exception Handling: Robust exception handling mechanism.
+  - AutoMapper and FluentValidation: Used for mapping and validation.
+  - Serilog Logging: Integrated Serilog for logging exceptions, with logs saved in JSON and TXT formats.
+  - Database Seeding with Bogus: Utilized Bogus library to seed the database with fake test data for easier testing.
 
-• SOLID
 
-• EF Core (CodeFirst)
+## Scenario
+The Nowadays system will manage:
 
-EKSTRA EKLENEN ÖZELLİKLER
+- Companies: Add, Delete, Update companies.
+- Projects: Add, Delete, Update, Assign projects to companies.
+- Employees: Add, Delete, Update, Assign employees to projects.
+- Issues: Add, Delete, Update, Assign issues to employees.
+- Reporting: Generate various reports.
 
-• Projeye JWT Token ve Refresh Token,
 
-• .NET Identity Library entegrasyonu ile birlikte Login, Register , Confirm Email, Forgot-Reset Password, Login-2FA gibi endpointler,
+## RESTful Services
+- **The API will include the following services**
+- Company Service: Manage companies.
+- Project Service: Manage projects.
+- Employee Service: Manage employees.
+- Issue Service: Manage issues.
+- Report Service: Generate reports.
 
-• Exception Handling mekanizması ,
 
-• AutoMapper ve FluentValidation kütüphanesi,
 
-• Serilog ile birlikte Exception Logging mekanizması ve bu logları json ve txt formatında kaydeden bir yapı,
 
-• Aynı zamanda Bogus kütüphanesi ile SeedData kullanarak Database içerisindeki tablolara fake test dataları eklenerek testin kolaylaşması
+## Implementations
+- **Implementation Details**
+- Interface/Abstract Class Usage: The existing infrastructure includes interfaces and abstract classes for better code organization and reusability.
+- Identity Verification: Employee identity verification through TC (Turkish Citizenship) number validation using the provided web service.
 
-gibi ek mimari ve yapılar eklenmiştir.
 
-SENARYO
-Nowadays adında bir görev takip sistemi (issue tracking) dizayn edilecek. (Ex: Jira)
-Şirket oluşturarak ilgili şirkete proje;
-Proje oluşturarak ilgili projeye çalışan ve görev;
-Görev oluşturarak ilgili göreve projede bulunan çalışanlar eklenebilmelidir.
-İlgili uygulamada;
+## Installation and Usage
+To clone the project to your local environment:
 
-• Şirket Ekleme/Silme/Düzenleme
+```bash
+git clone https://github.com/BatuhanKayaoglu/Nowadays.git
+```
 
-• Proje Ekleme/Silme/Düzenleme/Atama
+## Database Migration
+Run the following commands to apply migrations and seed the database:
 
-• Çalışan Ekleme/Silme/Düzenleme/Atama
-
-• Görev Ekleme/Silme/Düzenleme/Atama
-
-• Raporlama
-
-hizmetleri olmalıdır.
-Restful mimari kullanılarak geliştirilecek olan bu API;
-
-• Company
-
-• Project
-
-• Employee
-
-• Issue
-
-• Report
-
-servislerini barındırmalıdır.
-
-1. Mevcut altyapı interface/abstract class gibi veri yapılarını barındırmalıdır.
-
-2. Sisteme eklenen çalışanların TC kimlik numaraları doğrulanarak tüzel kişi
-oldukları tespit edilmelidir. Örneğin: (https://tckimlik.nvi.gov.tr/service/kpspublic.asmx?wsdl)
+```bash
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
