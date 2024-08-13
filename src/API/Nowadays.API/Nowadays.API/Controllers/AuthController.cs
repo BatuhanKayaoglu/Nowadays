@@ -3,18 +3,12 @@ using Nowadays.Common.ResponseViewModel;
 using Nowadays.Common.ViewModels;
 using Nowadays.Infrastructure.IRepositories;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Nowadays.API.Exceptions;
-using Nowadays.API.Extensions.JwtConf;
-//using Nowadays.API.Pagination;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 using Nowadays.API.Services.Auth;
 using Nowadays.API.Services.Token;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
 namespace Nowadays.API.Controllers
@@ -28,6 +22,7 @@ namespace Nowadays.API.Controllers
         private readonly ITokenService _tokenService = tokenService;
         private readonly IUnitOfWork _uow = uow;
 
+        [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost]
         [Route("Register")]
         public async Task<IActionResult> Register(CreateUserResponseViewModel user)
@@ -55,7 +50,7 @@ namespace Nowadays.API.Controllers
                 return new LoginUserViewModel { NameSurname = user.EmailAddress };
             }
 
-            var result = await _authService.Login(user);
+            LoginUserViewModel result = await _authService.Login(user);
 
             TokenResponseDto responseJwt = await _tokenService.GenerateJwtToken(result);
             result.Token = responseJwt.Token;
@@ -63,6 +58,25 @@ namespace Nowadays.API.Controllers
 
             return result;
         }
+
+
+        // For testing  
+        [HttpPost]
+        [Route("GenerateTestJwtToken")]
+        public async Task<LoginUserViewModel> GenerateToken()
+        {
+            LoginUserViewModel lgn= new LoginUserViewModel();
+            lgn.NameSurname = "batu";
+            lgn.Id=Guid.NewGuid().ToString();  
+            TokenResponseDto responseJwt = await _tokenService.GenerateJwtToken(lgn);
+            lgn.Token = responseJwt.Token;
+            lgn.RefreshToken = responseJwt.RefreshToken;
+
+            return lgn;
+        }
+
+
+
 
 
         [HttpGet]
